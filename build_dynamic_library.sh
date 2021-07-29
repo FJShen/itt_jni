@@ -6,4 +6,12 @@
 javah -classpath target/classes com.fangjia.itt.ITT
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/ 
 export VTUNE_HOME=/opt/intel/oneapi/vtune/latest/ 
-gcc com_fangjia_itt_ITT.c -Wall -g -fPIC -fstack-protector -pthread -ldl -shared -I$VTUNE_HOME/sdk/include -L$VTUNE_HOME/sdk/lib64 -I$JAVA_HOME/include -I$JAVA_HOME/include/linux -L/home/shen449/ittapi/build_linux2/64/bin -I/home/shen449/ittapi/include -littnotify -o libittjni.so 
+
+export INTEL_LIBITTNOTIFY32=${VTUNE_HOME}/lib32/runtime/libittnotify_collector.so
+export INTEL_LIBITTNOTIFY64=${VTUNE_HOME}/lib64/runtime/libittnotify_collector.so
+
+gcc -L$VTUNE_HOME/sdk/lib64 \
+-I$VTUNE_HOME/sdk/include -I$JAVA_HOME/include -I$JAVA_HOME/include/linux -I/home/shen449/ittapi/include \
+-Wall -g -fPIC -fstack-protector \
+com_fangjia_itt_ITT.c \
+-ldl -pthread -littnotify -shared -o libittjni.so 
