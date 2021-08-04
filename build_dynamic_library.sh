@@ -14,4 +14,4 @@ gcc -L$VTUNE_HOME/sdk/lib64 \
 -I$VTUNE_HOME/sdk/include -I$JAVA_HOME/include -I$JAVA_HOME/include/linux -I/home/shen449/ittapi/include \
 -Wall -g -fPIC -fstack-protector \
 com_fangjia_itt_ITT.c \
--ldl -pthread -littnotify -shared -o libittjni.so 
+-littnotify -ldl -pthread -shared -o libittjni.so 
